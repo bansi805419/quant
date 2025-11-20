@@ -46,6 +46,7 @@
 <body>
   <div class="container">
     <h2>Select Day to Open PDF</h2>
+    <p id="dateTime" style="font-size:18px; margin-top:10px; color:#444;"></p>
     <select id="daySelect">
       <option value="">-- Select Day --</option>
       <option value="1">Monday</option>
@@ -72,6 +73,19 @@
 
       window.open(pdfUrl, '_blank');
     }
+      function updateDateTime() {
+      const now = new Date();
+      const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      const dayName = days[now.getDay()];
+
+      const date = now.toLocaleDateString('en-GB');
+      const time = now.toLocaleTimeString('en-GB', { hour12: false });
+
+      document.getElementById('dateTime').innerText = `${dayName} | ${date} | ${time}`;
+    }
+
+    setInterval(updateDateTime, 1000);
+    updateDateTime();
   </script>
 </body>
 </html>
